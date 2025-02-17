@@ -9,7 +9,7 @@ def dynamic_import(module_name, module_path):
     return module
 
 # Determine the path to the tools directory
-tools_dir = os.path.join(os.path.dirname(__file__), '..', 'tools')
+tools_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'tools')
 
 # Importing data extraction functions from the tools directory
 extract_emails = dynamic_import('extract_emails', os.path.join(tools_dir, 'extract_emails.py')).extract_emails
