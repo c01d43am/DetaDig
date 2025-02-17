@@ -1,4 +1,9 @@
 import sys
+import os
+
+# Add the parent directory to sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from DetaDig.Updates.update_checker import check_for_updates
 from DetaDig.Updates.data_extraction import extract_data
 
