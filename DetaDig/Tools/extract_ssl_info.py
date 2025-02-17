@@ -26,8 +26,8 @@ def extract_ssl_info(url):
         }
 
         # Convert the 'notBefore' and 'notAfter' dates to readable datetime format
-        not_before = datetime.strptime(cert_details['notBefore'], "%Y%m%d%H%M%SZ")
-        not_after = datetime.strptime(cert_details['notAfter'], "%Y%m%d%H%M%SZ")
+        not_before = datetime.strptime(cert_details['notBefore'], "%b %d %H:%M:%S %Y GMT")
+        not_after = datetime.strptime(cert_details['notAfter'], "%b %d %H:%M:%S %Y GMT")
 
         # Calculate time remaining until expiry
         current_date = datetime.utcnow()
