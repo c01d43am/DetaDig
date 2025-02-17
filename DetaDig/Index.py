@@ -17,7 +17,7 @@ def main():
 
     while True:
         print("\nSelect the data you want to extract:")
-        print("1. Extract Emails")
+        print("1. Extract Emails1")
         print("2. Extract Phone Numbers")
         print("3. Extract Addresses")
         print("4. Extract Social Media Links")
