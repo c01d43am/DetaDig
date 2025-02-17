@@ -1,26 +1,20 @@
-import importlib.util
+import sys
 import os
 
-# Function to dynamically import a module
-def dynamic_import(module_name, module_path):
-    spec = importlib.util.spec_from_file_location(module_name, module_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-# Determine the path to the tools directory
+# Add the tools directory to sys.path
 tools_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'tools')
+sys.path.append(tools_dir)
 
 # Importing data extraction functions from the tools directory
-extract_emails = dynamic_import('extract_emails', os.path.join(tools_dir, 'extract_emails.py')).extract_emails
-extract_phone_numbers = dynamic_import('extract_phone_numbers', os.path.join(tools_dir, 'extract_phone_numbers.py')).extract_phone_numbers
-extract_addresses = dynamic_import('extract_addresses', os.path.join(tools_dir, 'extract_addresses.py')).extract_addresses
-extract_social_links = dynamic_import('extract_social_links', os.path.join(tools_dir, 'extract_social_links.py')).extract_social_links
-extract_product_pricing = dynamic_import('extract_product_pricing', os.path.join(tools_dir, 'extract_product_pricing.py')).extract_product_pricing
-extract_technology_stack = dynamic_import('extract_technology_stack', os.path.join(tools_dir, 'extract_technology_stack.py')).extract_technology_stack
-extract_ssl_info = dynamic_import('extract_ssl_info', os.path.join(tools_dir, 'extract_ssl_info.py')).extract_ssl_info
-extract_meta_tags = dynamic_import('extract_meta_tags', os.path.join(tools_dir, 'extract_meta_tags.py')).extract_meta_tags
-extract_internal_links = dynamic_import('extract_internal_links', os.path.join(tools_dir, 'extract_internal_links.py')).extract_internal_links
+from ..Tools.extract_emails import extract_emails
+from ..Tools.extract_phone_numbers import extract_phone_numbers
+from ..Tools.extract_addresses import extract_addresses
+from ..Tools.extract_social_links import extract_social_links
+from ..Tools.extract_product_pricing import extract_product_pricing
+from ..Tools.extract_technology_stack import extract_technology_stack
+from ..Tools.extract_ssl_info import extract_ssl_info
+from ..Tools.extract_meta_tags import extract_meta_tags
+from ..Tools.extract_internal_links import extract_internal_links 
 
 def extract_data(url, choice):
     if choice == '1':
