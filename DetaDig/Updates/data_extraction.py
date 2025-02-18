@@ -30,7 +30,8 @@ def extract_data(url, choice):
     elif choice == '6':
         return extract_technology_stack(url)
     elif choice == '7':
-        return ssl_menu(url)
+        ssl_menu(url)
+        return "SSL menu completed."
     elif choice == '8':
         return extract_meta_tags(url)
     elif choice == '9':

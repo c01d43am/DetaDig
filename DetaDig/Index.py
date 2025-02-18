@@ -11,12 +11,11 @@ from DetaDig.Design.design import Font_banner
 def main():
     # Display the banner
     Font_banner()
+
     # Check if repo is up to date before proceeding
     if not check_for_updates():
         print("Unable to proceed due to update issues.")
         return
-
-    url = input("Enter the website URL (e.g., https://example.com): ")
 
     while True:
         print("\nSelect the data you want to extract (comma-separated for multiple choices):")
@@ -38,14 +37,19 @@ def main():
             print("Exiting the program. Goodbye!")
             break
 
+        url = input("Enter the website URL or domain name (e.g., https://example.com or example.com): ")
+
         for choice in choices:
             choice = choice.strip()
-            result = extract_data(url, choice)
-            if choice == '10':
-                for key, value in result.items():
-                    print(f"{key}: {value}")
-            else:
-                print(f"Result for choice {choice}: {result}")
+            try:
+                result = extract_data(url, choice)
+                if choice == '10':
+                    for key, value in result.items():
+                        print(f"{key}: {value}")
+                else:
+                    print(f"Result for choice {choice}: {result}")
+            except Exception as e:
+                print(f"An error occurred while processing choice {choice}: {e}")
 
 if __name__ == "__main__":
     main()
