@@ -14,3 +14,4 @@ def extract_addresses(url):
     addresses = set(re.findall(address_pattern, page_text))
     
     return addresses if addresses else "No addresses found"
+ 
