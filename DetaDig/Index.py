@@ -16,8 +16,8 @@ def main():
     url = input("Enter the website URL (e.g., https://example.com): ")
 
     while True:
-        print("\nSelect the data you want to extract:")
-        print("1. Extract Emails1")
+        print("\nSelect the data you want to extract (comma-separated for multiple choices):")
+        print("1. Extract Emails")
         print("2. Extract Phone Numbers")
         print("3. Extract Addresses")
         print("4. Extract Social Media Links")
@@ -29,18 +29,20 @@ def main():
         print("10. Extract All Data")
         print("11. Exit")
 
-        choice = input("Enter your choice (1-11): ")
+        choices = input("Enter your choices (e.g., 1,3,5): ").split(',')
 
-        result = extract_data(url, choice)
-        if choice == '10':
-            for key, value in result.items():
-                print(f"{key}: {value}")
-        else:
-            print(f"Result: {result}")
-
-        if choice == '11':
+        if '11' in choices:
             print("Exiting the program. Goodbye!")
             break
+
+        for choice in choices:
+            choice = choice.strip()
+            result = extract_data(url, choice)
+            if choice == '10':
+                for key, value in result.items():
+                    print(f"{key}: {value}")
+            else:
+                print(f"Result for choice {choice}: {result}")
 
 if __name__ == "__main__":
     main()
