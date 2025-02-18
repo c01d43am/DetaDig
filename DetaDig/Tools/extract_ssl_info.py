@@ -2,6 +2,7 @@ import ssl
 import socket
 from datetime import datetime
 
+
 def extract_ssl_info(url):
     """
     Extract SSL certificate details and its expiry date from the given URL.
@@ -15,7 +16,7 @@ def extract_ssl_info(url):
             with context.wrap_socket(sock, server_hostname=hostname) as ssock:
                 cert = ssock.getpeercert()
 
-        # If cert is retrieved as a dictionary
+        # Extract certificate details
         cert_details = {
             "issuer": cert.get('issuer'),
             "subject": cert.get('subject'),
@@ -45,8 +46,8 @@ def display_ssl_info(ssl_info):
     Display SSL certificate details.
     """
     if isinstance(ssl_info, dict):
-        print("\nSSL Certificate Details:")
         cert_details = ssl_info['certificate_details']
+        print("\nSSL Certificate Details:")
         print(f"  Issuer: {cert_details['issuer']}")
         print(f"  Subject: {cert_details['subject']}")
         print(f"  Serial Number: {cert_details['serial_number']}")
@@ -60,11 +61,67 @@ def display_ssl_info(ssl_info):
         print(ssl_info)
 
 
-def main(url):
+def scan_url(url):
     """
-    Main function to process a URL and display SSL certificate details.
+    Scan a single URL and display SSL information.
     """
-    # Extract and display SSL Information
+    print(f"\nScanning: {url}")
     ssl_info = extract_ssl_info(url)
     display_ssl_info(ssl_info)
-    main(url)
+
+
+def bulk_scan(file_path):
+    """
+    Perform a bulk scan by reading URLs from a file.
+    """
+    try:
+        with open(file_path, 'r') as file:
+            urls = [url.strip() for url in file.readlines() if url.strip()]
+        
+        if urls:
+            for url in urls:
+                scan_url(url)
+        else:
+            print("No valid URLs found in the file.")
+    except FileNotFoundError:
+        print("File not found. Please enter a valid file path.")
+
+
+def get_file_path():
+    """
+    Get a valid .txt file path from the user.
+    """
+    file_path = input("Enter file path with URLs (txt file format): ")
+    if file_path.endswith(".txt"):
+        return file_path
+    else:
+        print("Please enter a valid .txt file path.")
+        return None
+
+
+def main():
+    """
+    Main function to drive the menu-based SSL certificate scanner.
+    """
+    while True:
+        print("\nSSL Certificate Scanner")
+        print("1. Single URL Scan")
+        print("2. Bulk Scan from File")
+        print("3. Exit")
+        
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            url = input("Enter URL: ")
+            scan_url(url)
+        elif choice == '2':
+            file_path = get_file_path()
+            if file_path:
+                bulk_scan(file_path)
+        elif choice == '3':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
