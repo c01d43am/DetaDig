@@ -59,7 +59,7 @@ def display_ssl_info(ssl_info):
         print(ssl_info)
 
 def single_scan():
-    url = input("Enter URL: ")
+    url = url
     ssl_info = extract_ssl_info(url)
     display_ssl_info(ssl_info)
 
@@ -77,7 +77,7 @@ def bulk_scan():
     except FileNotFoundError:
         print("File not found. Please enter a valid file path.")
 
-def ssl_menu():
+def ssl_menu(url):
     while True:
         print("\nSSL Certificate Scanner")
         print("1. Single URL Scan")
@@ -85,7 +85,7 @@ def ssl_menu():
         print("3. Exit")
         choice = input("Enter your choice: ")
         if choice == '1':
-            single_scan()
+            single_scan(url)
         elif choice == '2':
             bulk_scan()
         elif choice == '3':
