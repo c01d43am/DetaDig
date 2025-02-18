@@ -6,8 +6,11 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DetaDig.Updates.update_checker import check_for_updates
 from DetaDig.Updates.data_extraction import extract_data
+from DetaDig.Design.design import Font_banner
 
 def main():
+    # Display the banner
+    Font_banner()
     # Check if repo is up to date before proceeding
     if not check_for_updates():
         print("Unable to proceed due to update issues.")
