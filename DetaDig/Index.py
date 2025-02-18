@@ -9,13 +9,15 @@ from DetaDig.Updates.data_extraction import extract_data
 from DetaDig.Design.design import Font_banner
 
 def main():
-    # Display the banner
-    Font_banner()
-
     # Check if repo is up to date before proceeding
     if not check_for_updates():
         print("Unable to proceed due to update issues.")
         return
+
+    # Display the banner
+    Font_banner()
+
+    url = input("Enter the website URL or domain name (e.g., https://example.com or example.com): ")
 
     while True:
         print("\nSelect the data you want to extract (comma-separated for multiple choices):")
@@ -36,8 +38,6 @@ def main():
         if '11' in choices:
             print("Exiting the program. Goodbye!")
             break
-
-        url = input("Enter the website URL or domain name (e.g., https://example.com or example.com): ")
 
         for choice in choices:
             choice = choice.strip()
