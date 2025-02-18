@@ -12,7 +12,7 @@ from ..Tools.extract_addresses import extract_addresses
 from ..Tools.extract_social_links import extract_social_links
 from ..Tools.extract_product_pricing import extract_product_pricing
 from ..Tools.extract_technology_stack import extract_technology_stack
-from ..Tools.extract_ssl_info import extract_ssl_info
+from ..Tools.extract_ssl_info import ssl_menu
 from ..Tools.extract_meta_tags import extract_meta_tags
 from ..Tools.extract_internal_links import extract_internal_links 
 
@@ -30,7 +30,7 @@ def extract_data(url, choice):
     elif choice == '6':
         return extract_technology_stack(url)
     elif choice == '7':
-        return extract_ssl_info(url)
+        return ssl_menu()
     elif choice == '8':
         return extract_meta_tags(url)
     elif choice == '9':
@@ -44,7 +44,7 @@ def extract_data(url, choice):
             "Social media links": extract_social_links(url),
             "Product prices": extract_product_pricing(url),
             "Technology Stack": extract_technology_stack(url),
-            "SSL/TLS Info": extract_ssl_info(url),
+            "SSL/TLS Info": ssl_menu(url),
             "Meta Tags": extract_meta_tags(url),
             "Internal links": extract_internal_links(url)
         }
